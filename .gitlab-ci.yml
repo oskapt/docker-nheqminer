@@ -1,0 +1,22 @@
+before_script:
+  - docker info
+  - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.monach.us
+
+build:
+  stage: build
+  script:
+    - docker build --pull -t registry.monach.us/docker/nheqminer --build-arg VCS_REF=$CI_BUILD_REF .
+    - docker push registry.monach.us/docker/nheqminer
+
+push_to_docker_hub:
+  stage: deploy
+  script:
+    - docker login -u $HUB_USERNAME -p $HUB_PASSWORD
+    - docker tag registry.monach.us/docker/nheqminer:latest monachus/nheqminer:latest
+    - docker push monachus/nheqminer
+
+# ping_microbadger:
+#   stage: deploy
+#   script:
+#     - curl -XPOST https://hooks.microbadger.com/images/monachus/zcash/paPUOBrQrKDlr3g5YBRtmu_En6o=
+

@@ -1,0 +1,8 @@
+---
+# nheqminer compose instructions
+miner:
+  container_name: miner
+  image: monachus/nheqminer
+  environment:
+    - THREADS=6
+    - BTC_ADDR=changeme
