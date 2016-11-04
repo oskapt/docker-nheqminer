@@ -18,6 +18,9 @@ by running:
 $ docker pull monachus/nheqminer
 ```
 
+**WARNING:** This container is stupidly large. Unreasonably so. I don't recommend
+that you pull it. Build it instead.
+
 ## Building the Container
 
 Building the container is easy:
@@ -27,13 +30,13 @@ $ docker build -t monachus/nheqminer .
 
 ## Start up the miner
 
-I've provided a `docker-compose.yml` file that you can use to start the container.
-Edit the file and set your `BTC_ADDR` in the environment. Change `THREADS` if you
-want to, setting it to 75% of the actual CPU threads on your system.
+I've provided a config file for Docker Compose that you can use to start the container.
 
-Launch it with `docker-compose up` and watch the magic happen!
-
-(Add `-d` to run the container in detached mode.)
+1. Copy `docker-compose.sample.yml` to `docker-compose.yml`
+2. Edit the file and set your `BTC_ADDR` in the environment.
+3. Change `THREADS` if you want to, setting it to 75% of the actual CPU threads
+on your system.
+4. Launch it with `docker-compose up` and watch the magic happen! (Add `-d` to run the container in detached mode.)
 
 This will fire up the daemon and start CPU mining with your hardware.
 
